@@ -87,18 +87,21 @@ namespace libfoo {
         }
 
         explicit operator foo_thing2_t* () {
-            return _thing.get();
+            return base_type();
         }
 
         explicit operator const foo_thing2_t* () const {
-            return _thing.get();
+            return base_type();
         }
 
         void print() const {
-            return foo_thing2_print(static_cast<const foo_thing2_t*>(*this));
+            foo_thing2_print(base_type());
         }
 
     private:
+        foo_thing2_t* base_type() { return _thing.get(); }
+        foo_thing2_t const* base_type() const { return _thing.get(); }
+
         unique_ptr<foo_thing2_t> _thing;
     };
 

@@ -48,13 +48,19 @@ namespace libfoo {
         return unique_ptr(lifecycle::ctor(std::forward<Args>(args)...), lifecycle::dtor);
     }
 
+    template<typename T, class... Args>
+    std::shared_ptr<T> make_shared(Args&& ...args) {
+        using lifecycle = typename traits<T>::lifecycle;
+        return std::shared_ptr<T>(lifecycle::ctor(std::forward<Args>(args)...), lifecycle::dtor);
+    }
+
 } // namespace libfoo
 
 int main(int argc, char* argv[]) {
 
     auto thing1 = libfoo::make_unique<foo_thing1_t>();
     auto thing2_a = libfoo::make_unique<foo_thing2_t>(0.0);
-    auto thing2_b = libfoo::make_unique<foo_thing2_t>(42.0);
+    auto thing2_b = libfoo::make_shared<foo_thing2_t>(42.0);
 
     thing2_b->val = thing1->val * thing2_a->val;
     assert(thing2_b->val == 0.0);

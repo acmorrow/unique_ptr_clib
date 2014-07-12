@@ -48,6 +48,12 @@ namespace libfoo {
         return unique_ptr(lifecycle::ctor(std::forward<Args>(args)...), lifecycle::dtor);
     }
 
+    template<typename T, class... Args>
+    std::shared_ptr<T> make_shared(Args&& ...args) {
+        using lifecycle = typename traits<T>::lifecycle;
+        return std::shared_ptr<T>(lifecycle::ctor(std::forward<Args>(args)...), lifecycle::dtor);
+    }
+
     class thing1_t {
     public:
         template<class... Args>

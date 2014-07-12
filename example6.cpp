@@ -89,8 +89,8 @@ namespace libfoo {
 int main(int argc, char* argv[]) {
 
     libfoo::thing1_t thing1;
-    libfoo::thing2_t thing2_a(0.0);
-    libfoo::thing2_t thing2_b(42);
+    libfoo::thing2_t thing2_a{0.0};
+    libfoo::thing2_t thing2_b{42};
 
     thing2_b.value(thing1.value() * thing2_a.value());
     assert(thing2_b.value() == 0.0);

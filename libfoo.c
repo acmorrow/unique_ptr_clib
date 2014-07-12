@@ -26,3 +26,7 @@ void foo_thing2_destroy(foo_thing2_t* thing2) {
     printf("libfoo: destroying a thing2_t at %p\n", thing2);
     free(thing2);
 }
+
+void foo_thing2_print(foo_thing2_t const* thing2) {
+    printf("libfoo: thing2 at %p has value %f\n", thing2, thing2->val);
+}

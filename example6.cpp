@@ -80,6 +80,18 @@ namespace libfoo {
             _thing->val = value;
         }
 
+        explicit operator foo_thing2_t* () {
+            return _thing.get();
+        }
+
+        explicit operator const foo_thing2_t* () const {
+            return _thing.get();
+        }
+
+        void print() const {
+            return foo_thing2_print(static_cast<const foo_thing2_t*>(*this));
+        }
+
     private:
         unique_ptr<foo_thing2_t> _thing;
     };
@@ -94,6 +106,9 @@ int main(int argc, char* argv[]) {
 
     thing2_b.value(thing1.value() * thing2_a.value());
     assert(thing2_b.value() == 0.0);
+
+    foo_thing2_print(static_cast<foo_thing2_t*>(thing2_b));
+    thing2_b.print();
 
     return EXIT_SUCCESS;
 }

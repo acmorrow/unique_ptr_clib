@@ -26,6 +26,8 @@ typedef struct foo_thing2 {
 LIBFOO_API foo_thing2_t* foo_thing2_create(double value1) LIBFOO_NOEXCEPT;
 LIBFOO_API void foo_thing2_destroy(foo_thing2_t* thing2) LIBFOO_NOEXCEPT;
 
+LIBFOO_API void foo_thing2_print(foo_thing2_t const* thing1) LIBFOO_NOEXCEPT;
+
 #if defined(__cplusplus)
 } // extern "C"
 #endif
